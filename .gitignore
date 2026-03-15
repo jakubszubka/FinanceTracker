@@ -1,0 +1,38 @@
+# Build folders
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider / JetBrains
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Local databases
+*.db
+*.sqlite
+
+# EF Core temporary files
+*.mdf
+*.ldf
+
+# Environment variables
+.env
+
+# NuGet
+*.nupkg
+packages/
+
+# Test results
+TestResults/
