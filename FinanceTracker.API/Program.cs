@@ -1,3 +1,5 @@
+using FinanceTracker.Application.Interfaces;
+using FinanceTracker.Application.Services;
 using FinanceTracker.Infrastructure.Data;
 using FinanceTracker.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
@@ -22,6 +24,23 @@ namespace FinanceTracker.API
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
+            builder.Services.AddScoped<ITransactionService, TransactionService>();
+            builder.Services.AddAuthentication();
+            builder.Services.AddAuthorization();
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.Events.OnRedirectToLogin = context =>
+                {
+                    context.Response.StatusCode = 401;
+                    return Task.CompletedTask;
+                };
+
+                options.Events.OnRedirectToAccessDenied = context =>
+                {
+                    context.Response.StatusCode = 403;
+                    return Task.CompletedTask;
+                };
+            });
 
             var app = builder.Build();
 
@@ -34,6 +53,7 @@ namespace FinanceTracker.API
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

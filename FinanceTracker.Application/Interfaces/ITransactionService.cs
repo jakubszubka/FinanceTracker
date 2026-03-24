@@ -16,4 +16,6 @@ public interface ITransactionService
     Task<TransactionDto> CreateTransaction(CreateTransactionDto dto, string userId);
 
     Task<bool> DeleteTransaction(int id, string userId);
+
+    Task<TransactionDto?> UpdateTransaction(int id, UpdateTransactionDto uDto, string userId);
 }

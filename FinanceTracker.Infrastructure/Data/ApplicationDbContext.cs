@@ -19,5 +19,17 @@ namespace FinanceTracker.Infrastructure.Data
 
         public DbSet<Transaction> Transactions => Set<Transaction>();
         public DbSet<Category> Categories => Set<Category>();
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<Category>().HasData(
+                new Category { Id = 1, Name = "Food" },
+                new Category { Id = 2, Name = "Transport" },
+                new Category { Id = 3, Name = "Salary" },
+                new Category { Id = 4, Name = "Entertainment" }
+            );
+        }
     }
 }

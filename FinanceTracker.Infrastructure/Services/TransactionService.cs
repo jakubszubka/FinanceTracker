@@ -25,13 +25,14 @@ public class TransactionService : ITransactionService
             Description = cDto.Description,
             Date = cDto.Date,
             CategoryId = cDto.CategoryId,
-            //Category = await _db.Categories.Where(t => t.Id == cDto.CategoryId).FirstOrDefaultAsync(),
             Type = (Domain.Enums.TransactionType)cDto.Type,
             UserId = userId
         };
 
         _db.Transactions.Add(transaction);
         await _db.SaveChangesAsync();
+
+        transaction.Category = await _db.Categories.Where(t => t.Id == cDto.CategoryId).FirstOrDefaultAsync();
 
         return new TransactionDto
         {
