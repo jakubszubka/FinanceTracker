@@ -1,5 +1,5 @@
 using FinanceTracker.Application.Interfaces;
-using FinanceTracker.Application.Services;
+using FinanceTracker.Infrastructure.Services;
 using FinanceTracker.Infrastructure.Data;
 using FinanceTracker.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
@@ -25,6 +25,7 @@ namespace FinanceTracker.API
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
             builder.Services.AddScoped<ITransactionService, TransactionService>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddAuthentication();
             builder.Services.AddAuthorization();
             builder.Services.ConfigureApplicationCookie(options =>

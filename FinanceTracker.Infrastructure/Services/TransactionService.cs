@@ -11,7 +11,7 @@ using FinanceTracker.Domain.Entities;
 using FinanceTracker.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace FinanceTracker.Application.Services;
+namespace FinanceTracker.Infrastructure.Services;
 
 public class TransactionService : ITransactionService
 {

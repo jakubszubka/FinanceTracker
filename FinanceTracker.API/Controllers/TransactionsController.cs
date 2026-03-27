@@ -1,6 +1,6 @@
 ﻿using FinanceTracker.Application.DTOs;
 using FinanceTracker.Application.Interfaces;
-using FinanceTracker.Application.Services;
+using FinanceTracker.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
