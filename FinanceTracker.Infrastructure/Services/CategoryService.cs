@@ -30,7 +30,7 @@ namespace FinanceTracker.Infrastructure.Services
             return categories;
         }
 
-        public async Task<CategoryDto> GetCategoryById(int id)
+        public async Task<CategoryDto?> GetCategoryById(int id)
         {
             var category = await _db.Categories
                 .Where(c => c.Id == id)
@@ -82,5 +82,27 @@ namespace FinanceTracker.Infrastructure.Services
             return true;
         }
 
+        public async Task<CategoryDto?> UpdateCategory(int categoryId, UpdateCategoryDto dto)
+        {
+            if (string.IsNullOrWhiteSpace(dto.Name))
+                throw new Exception("Category name is required");
+
+            var category = await _db.Categories.FindAsync(categoryId);
+
+            if (category == null) return null;
+
+            if (await _db.Categories.AnyAsync(c => c.Name.ToLower() == dto.Name.ToLower() && c.Id != categoryId))
+                throw new Exception("Category already exists");
+
+            category.Name = dto.Name;
+
+            await _db.SaveChangesAsync();
+
+            return new CategoryDto
+            {
+                Id = category.Id,
+                Name = category.Name
+            };
+        }
     }
 }

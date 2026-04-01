@@ -16,5 +16,7 @@ public interface ICategoryService
     Task<CategoryDto> CreateCategory(CreateCategoryDto dto);
 
     Task<bool> DeleteCategory(int categoryId);
+
+    Task<CategoryDto> UpdateCategory(int categoryId, UpdateCategoryDto dto);
 }
 

@@ -28,6 +28,7 @@ namespace FinanceTracker.API.Controllers;
         public async Task<IActionResult> GetCategoryById(int id)
         {
             var category = await _categoryService.GetCategoryById(id);
+            if (category == null) return NotFound();
             return Ok(category);
         }
 
@@ -57,5 +58,22 @@ namespace FinanceTracker.API.Controllers;
             return NoContent();
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateCategory(int id, UpdateCategoryDto dto)
+        {
+            try
+            {
+                var updatedCategory = await _categoryService.UpdateCategory(id, dto);
+
+                if (updatedCategory == null)
+                    return NotFound();
+
+                return Ok(updatedCategory);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 
